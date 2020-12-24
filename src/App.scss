@@ -1,0 +1,238 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Poppins:wght@400&display=swap');
+
+/* Mixin for scss */
+$size__site_content_width: 1920px;
+
+/* Media Queries */ 
+$media_queries : (
+    'mobile'    : "only screen and (max-width: 667px)",
+    'tablet'    : "only screen and (min-width: 668px) and (max-width: $size__site_content_width)",
+    'desktop'   : "only screen and (min-width: ($size__site_content_width + 1))",
+    'retina2'   : "only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)",
+    'retina3'   : "only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)",
+    'landscape' : "screen and (orientation:landscape) ",    
+    'portrait'  : "screen and (orientation:portrait) "
+);
+
+@mixin for_breakpoint($breakpoints) {
+    $conditions : ();
+    @each $breakpoint in $breakpoints {
+        // If the key exists in the map
+        $conditions: append(
+            $conditions,
+            #{inspect(map-get($media_queries, $breakpoint))},
+            comma
+        );
+    }
+
+    @media #{$conditions} {
+        @content;
+    }
+
+}
+
+$jet: #533747;
+$dodget-blue: #1e96fc;
+$lemon-meringue: #eae2b7;
+$pumpkin: #f3752b;
+$pink-lace: #ffe2fe;
+$text-light: #98557b;
+$text-lighter: #989898;
+$text-dark: $jet;
+
+#root {
+    background-color: #eae2b740;
+}
+
+.poppin-font {
+    font-family: 'Poppins', 'Courier New', Courier, monospace;
+    color: $text-dark;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.section-title {
+    @extend .poppin-font;
+    text-align: left;
+    width: 100%;
+    margin-top: 100px;
+}
+
+nav {
+    max-width: $size__site_content_width;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+
+    a {
+        @extend .poppin-font;
+
+        &.active {
+            color: $pumpkin;
+        }
+    }
+
+    .nav-item {
+        padding-right: 40px;
+    }
+}
+
+.home {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transition: all 300s ease-in-out;
+
+    section {
+        max-width: $size__site_content_width;
+    }
+
+    .header {
+        font-family: 'PT Serif';
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .intro {
+            font-size: 36px;
+            line-height: 72px;
+            font-weight: 700;
+            color: $text-lighter;
+            @include for_breakpoint(mobile) {
+                font-size: 30px;
+            }
+        }
+        .subtitle {
+            font-size: 62px;
+            font-weight: 600;
+            color: $text-light;
+            @include for_breakpoint(mobile) {
+                font-size: 40px;
+                margin-top: 5px;
+            }
+            .subtitle-diff {
+                font-family: 'Caveat';
+                font-size: 76px;
+                color: $pumpkin;
+                @include for_breakpoint(mobile) {
+                    font-size: 50px;
+                }
+            }
+        }
+    }
+
+    .half-half {
+        display: flex;
+        max-width: $size__site_content_width;
+        justify-content: space-between;
+
+        @include for_breakpoint(mobile) {
+            flex-direction: column;
+        }
+    }
+
+    .experience {
+        min-height: 250px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #ffffff4f;
+        margin: 20px 0;
+        border-radius: 50px;
+        box-shadow: 0px 12px 24px -14px #d2d2d2;
+        transition: 300ms ease-in all;
+        cursor: pointer;
+
+        @include for_breakpoint(mobile) {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        &:hover {
+            box-shadow: 0px 12px 24px -7px #d2d2d2;
+        }
+
+        .experience-wrapper {
+            display: flex;
+            justify-content: space-evenly;
+
+            @include for_breakpoint(mobile) {
+                flex-direction: column-reverse;
+            }
+            .logo {
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                img {
+                    width: 100%;
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    display: none;
+                }
+
+                @include for_breakpoint(mobile) {
+                    padding: 5px 20px;
+                    width: calc(100% - 40px);
+                }
+            }
+            .experience-body {
+                width: 50%;
+                color: $text-dark;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                @include for_breakpoint(mobile) {
+                    width: calc(100% - 40px);
+                    margin: 0 auto;
+                }
+
+                .company {
+                    font-family: 'PT Serif';
+                    font-size: 42px;
+                    font-weight: 600;
+                    @include for_breakpoint(mobile) {
+                        font-size: 30px;
+                    }
+                }
+            }
+            .designation {
+                font-family: 'PT Serif';
+                font-size: 24px;
+                @include for_breakpoint(mobile) {
+                    font-size: 16px;
+                }
+            }
+            .duration {
+                @extend .poppin-font;
+                letter-spacing: unset;
+                margin-top: 7px;
+                @include for_breakpoint(mobile) {
+                    font-size: 14px;
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    .fa {
+        padding: 0 10px;
+        font-size: 22px;
+    }
+    .poppin-font p {
+        padding-top: 10px;
+        @include for_breakpoint(mobile) {
+            font-size: 10px;
+        }
+    }
+}
